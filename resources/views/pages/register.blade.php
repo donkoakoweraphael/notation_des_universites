@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-5 p-0">
                 <div style="padding-top: 100px; padding-bottom: 100px; padding-left: 50px;">
-                    <button style="font-size: 40px;" type="submit" class="btn border border-5 p-5 rounded-4"
+                    <button style="font-size: 40px;" type="submit" class="btn border  btn-light border-5 p-5 rounded-5"
                         style="color: #808080;">
                         S'enregistrer
                     </button>
