@@ -5,7 +5,7 @@
     Classement des universités
 @endsection
 
-@section('university-page-active') btn-secondary" @endsection
+@section('university-page-active') btn-secondary @endsection
 
 
 @section('content')

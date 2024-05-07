@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InformationSectionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UniversityAdministrationController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +30,21 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [ProfileController::class, 'update'])->name('user.update-profile');
     Route::patch('profile', [ProfileController::class, 'updatePassword'])->name('user.update-password');
     Route::post('profile', [ProfileController::class, 'updateImage'])->name('user.update-profile-image');
-    
+
     Route::post('logout', [LogoutController::class, 'destroy'])->name('logout');
 
     Route::middleware([EnsureUserIsAdmin::class])->group(function () {
-        Route::get('dashboard', function () {
-            return view('pages.admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('admin/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
+
+        Route::get('admin/universities', [UniversityAdministrationController::class, 'index'])->name('admin.university.index');
+        Route::get('admin/universities/create', [UniversityAdministrationController::class, 'create'])->name('admin.university.create');
+        Route::post('admin/universities/create', [UniversityAdministrationController::class, 'store'])->name('admin.university.store');
+        Route::get('admin/universities/{id}', [UniversityAdministrationController::class, 'edit'])->name('admin.university.edit');
+        Route::put('admin/universities/{id}', [UniversityAdministrationController::class, 'update'])->name('admin.university.update');
+        Route::delete('admin/universities/{id}', [UniversityAdministrationController::class, 'destroy'])->name('admin.university.destroy');
+
+        Route::post('admin/universities/{univ_id}/information/create', [InformationSectionController::class, 'store'])->name('admin.university.information.store');
+        Route::put('admin/universities/information/{id}', [InformationSectionController::class, 'update'])->name('admin.university.information.update');
+        Route::delete('admin/universities/information/{id}', [InformationSectionController::class, 'destroy'])->name('admin.university.information.destroy');
     });
 });

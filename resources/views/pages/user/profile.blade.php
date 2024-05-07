@@ -6,11 +6,12 @@
 @endsection
 
 @section('profile-page-active')
-    btn-secondary"
+    btn-secondary
 @endsection
 
 
 @section('content')
+<div class="p-5"></div>
     <div class="row">
         <div class="col-md-auto ">
             <div class="row justify-content-center border pt-4 pb-4">
