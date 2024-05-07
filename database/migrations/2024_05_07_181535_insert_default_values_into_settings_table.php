@@ -15,21 +15,29 @@ return new class extends Migration {
                 'key' => 'comments_number_per_user_per_university_per_day',
                 'name' => 'Nombre de commentaires que peut faire un utilisateur par jour sur une université',
                 'value' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'key' => 'max_note_to_display',
                 'name' => 'Afficher les notes des universités sur combien',
                 'value' => 5,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'key' => 'number_of_digits_after_decimal_point',
                 'name' => 'Nombre de commentaires que peut faire un utilisateur par jour sur une université',
                 'value' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'key' => 'number_of_university_per_page',
                 'name' => 'Nombre d\'universités à afficher par page dans le classement',
                 'value' => 10,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }
@@ -39,12 +47,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        DB::table('settings')
-            ->where('key', 'in', [
-                'comments_number_per_user_per_university_per_day',
-                'max_note_to_display',
-                'number_of_digits_after_decimal_point',
-                'number_of_university_per_page',
-            ])->delete();
+        DB::table('settings')->delete();
     }
 };
