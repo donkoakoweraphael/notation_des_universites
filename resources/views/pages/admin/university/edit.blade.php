@@ -257,5 +257,5 @@
 
 
 @section('toolbar')
-    <a href="" class="btn btn-outline-info">Voir un apperçu</a>
+    <a href="{{ route('user.university.read', $university->id) }}" class="btn btn-outline-info">Voir un apperçu</a>
 @endsection

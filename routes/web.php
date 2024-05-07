@@ -7,6 +7,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UniversityAdministrationController;
+use App\Http\Controllers\UniversityController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('home', function () {
         return view('pages.user.home');
     })->name('user.home');
+    Route::get('universities/{id}', [UniversityController::class, 'read'])->name('user.university.read');
+
     Route::get('profile', [ProfileController::class, 'edit'])->name('user.profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('user.update-profile');
     Route::patch('profile', [ProfileController::class, 'updatePassword'])->name('user.update-password');
