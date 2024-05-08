@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Criterion;
 use App\Models\Rating;
 use App\Models\Setting;
@@ -64,6 +65,8 @@ class UniversityController extends Controller
 
         $criteria = Criterion::whereNotIn('id', $alreadyRatedCriteriaIds)->get();
 
-        return view('pages.user.university.read', compact(['university', 'criteria']));
+        $comments = Comment::where('university_id', $university->id)->orderByDesc('created_at')->get();
+
+        return view('pages.user.university.read', compact(['university', 'criteria', 'comments']));
     }
 }

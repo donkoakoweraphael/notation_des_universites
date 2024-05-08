@@ -94,8 +94,60 @@
     </div>
 
     {{-- liste des commentaires --}}
+    <div class="container-fluid">
+        <div class=" m-5 p-5 border rounded-2">
+            <h4 style="text-align: center">
+                Liste des commentaires
+            </h4>
+            <hr>
+            @forelse ($comments as $comment)
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div style="height: 52px; width: 52px; border-radius: 26px; padding:1px" class="bg-light">
+                                <img style="height: 50px; width: 50px; border-radius: 25px;"
+                                    src="@if ($comment->user->image_path) {{ asset('storage/' . $comment->user->image_path) }} @else {{ asset('storage/' . $comment->user::$default_image_path) }} @endif"
+                                    alt="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h6>{{ $comment->user->first_name }} {{ $comment->user->last_name }} ( <strong>{{ $comment->created_at }}</strong> )</h6>
+                            <p>
+                                {{ $comment->message }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                Aucun commentaires
+            @endforelse
+        </div>
+    </div>
+
+    <br class="py-5 my-5">
 
     {{-- laisser un commentaire --}}
+    <div class="container">
+        <div class=" m-5 p-5 border rounded-2">
+            <h4 style="text-align: center">
+                Laisser un commentaire
+            </h4>
+            <form method="POST" action="{{ route('user.comment.store', $university->id) }}">
+                @csrf
+                <textarea name="message" rows="4" class="form-control">{{ old('message') }}</textarea>
+                @error('message')
+                    <p class="text-danger">
+                        {{ $message }}
+                    </p>
+                @enderror
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-outline-primary">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br class="py-5 my-5">
+
 
     {{-- notation --}}
     @if ($criteria->count() != 0)
@@ -103,7 +155,8 @@
             <div class=" m-5 p-5 border rounded-2">
                 <h4 style="text-align: center">
                     Donnez votre avis de l'université sur les critères suivant <br>
-                    <span class="fs-6" style="text-align: center">(Cela constitura des notes qui seront utilisées pour les classer)</span>
+                    <span class="fs-6" style="text-align: center">(Cela constitura des notes qui seront utilisées pour les
+                        classer)</span>
                 </h4>
                 <form method="POST" action="{{ route('user.rating.store', $university->id) }}">
                     @csrf

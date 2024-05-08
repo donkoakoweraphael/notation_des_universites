@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformationSectionController;
 use App\Http\Controllers\LoginController;
@@ -29,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('universities/{id}', [UniversityController::class, 'read'])->name('user.university.read');
 
     Route::post('ratings/{univ_id}', [RatingController::class, 'store'])->name('user.rating.store');
+    Route::post('comments/{univ_id}', [CommentController::class, 'store'])->name('user.comment.store');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('user.profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('user.update-profile');
