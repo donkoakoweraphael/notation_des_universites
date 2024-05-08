@@ -25,9 +25,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('home', function () {
-        return view('pages.user.home');
-    })->name('user.home');
+    Route::get('home', [UniversityController::class, 'index'])->name('user.home');
     Route::get('universities/{id}', [UniversityController::class, 'read'])->name('user.university.read');
 
     Route::post('ratings/{univ_id}', [RatingController::class, 'store'])->name('user.rating.store');

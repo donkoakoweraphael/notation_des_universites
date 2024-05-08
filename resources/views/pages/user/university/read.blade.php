@@ -101,7 +101,10 @@
     @if ($criteria->count() != 0)
         <div class="container">
             <div class=" m-5 p-5 border rounded-2">
-                <h4 style="text-align: center">Donnez votre avis de l'université sur les critères suivant</h4>
+                <h4 style="text-align: center">
+                    Donnez votre avis de l'université sur les critères suivant <br>
+                    <span class="fs-6" style="text-align: center">(Cela constitura des notes qui seront utilisées pour les classer)</span>
+                </h4>
                 <form method="POST" action="{{ route('user.rating.store', $university->id) }}">
                     @csrf
                     <div class="table-responsive">
@@ -109,11 +112,11 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Très mauvais</th>
-                                    <th>mauvais</th>
-                                    <th>Pas mal</th>
-                                    <th>Bien</th>
-                                    <th>Très bien</th>
+                                    <th>Très mauvais (1)</th>
+                                    <th>mauvais (2)</th>
+                                    <th>Pas mal (3)</th>
+                                    <th>Bien (4)</th>
+                                    <th>Très bien (5)</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -11,7 +11,7 @@
 
 
 @section('content')
-<div class="p-5"></div>
+    <div class="p-5"></div>
     <div class="row">
         <div class="col-md-auto ">
             <div class="row justify-content-center border pt-4 pb-4">
@@ -32,8 +32,13 @@
                         @endif
                         <li>{{ $user->last_name }} {{ $user->first_name }}</li>
                         <li>{{ $user->email }}</li>
-                        <li>{{ $user->calcSex() }}</li>
-                        <li>{{ $user->calcAge() }} ans</li>
+                        @if ($user->sex)
+                            <li>{{ $user->calcSex() }}</li>
+                        @endif
+                        @if ($user->age)
+                            <li>{{ $user->calcAge() }} ans</li>
+                        @endif
+                        <li>Vous avez donné {{ $user->ratings->count() }} avis</li>
                     </ul>
                 </div>
             </div>
@@ -140,6 +145,33 @@
                                 <button type="submit" class="btn btn-outline-success">Changer</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4"></div>
+
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="m-0 p-3 border rounded-top">
+                        <h3>
+                            Historique de notations
+                        </h3>
+                    </div>
+                    <div class="m-0 p-3 border">
+                        <ul>
+                            @foreach ($ratings as $rating)
+                                <li>
+                                    (<strong>{{ $rating->created_at }}</strong>)
+                                    Vous avez donné 
+                                    <strong>{{ $rating->score}}</strong> 
+                                    à l'université 
+                                    <strong>{{ $rating->university->name }}</strong>
+                                    pour le critère
+                                    <strong>{{ $rating->criterion->designation }}</strong>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>

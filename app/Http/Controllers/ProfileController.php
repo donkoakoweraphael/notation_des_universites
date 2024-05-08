@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,8 @@ class ProfileController extends Controller
     function edit()
     {
         $user = Auth::user();
-        return view('pages.user.profile', compact('user'));
+        $ratings = Rating::where('user_id', '=', $user->id)->orderByDesc('created_at')->get();
+        return view('pages.user.profile', compact(['user', 'ratings']));
     }
 
     function updateImage(Request $request)
