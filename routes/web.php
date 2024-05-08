@@ -5,6 +5,7 @@ use App\Http\Controllers\InformationSectionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UniversityAdministrationController;
 use App\Http\Controllers\UniversityController;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
         return view('pages.user.home');
     })->name('user.home');
     Route::get('universities/{id}', [UniversityController::class, 'read'])->name('user.university.read');
+
+    Route::post('ratings/{univ_id}', [RatingController::class, 'store'])->name('user.rating.store');
 
     Route::get('profile', [ProfileController::class, 'edit'])->name('user.profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('user.update-profile');

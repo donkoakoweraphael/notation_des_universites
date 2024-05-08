@@ -23,4 +23,9 @@ class University extends Model
     {
         return $this->hasMany(InformationSection::class);
     }
+
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
 }
