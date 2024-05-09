@@ -121,7 +121,7 @@
             </div>
         </li>
         <li>
-            <a href="#" class="nav-link @yield('criterion-page-active')">
+            <a href="{{ route('admin.criterion.index') }}" class="nav-link @yield('criterion-page-active')">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#table" />
                 </svg>

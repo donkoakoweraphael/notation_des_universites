@@ -12,6 +12,10 @@ class Criterion extends Model
 
     protected $table = 'criteria';
 
+    protected $fillable = [
+        'designation'
+    ];
+
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);

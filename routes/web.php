@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CriterionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InformationSectionController;
 use App\Http\Controllers\LoginController;
@@ -52,5 +53,12 @@ Route::middleware('auth')->group(function () {
         Route::post('admin/universities/{univ_id}/information/create', [InformationSectionController::class, 'store'])->name('admin.university.information.store');
         Route::put('admin/universities/information/{id}', [InformationSectionController::class, 'update'])->name('admin.university.information.update');
         Route::delete('admin/universities/information/{id}', [InformationSectionController::class, 'destroy'])->name('admin.university.information.destroy');
+
+        Route::get('admin/criteria', [CriterionController::class, 'index'])->name('admin.criterion.index');
+        Route::post('admin/criteria', [CriterionController::class, 'store'])->name('admin.criterion.store');
+        Route::get('admin/criteria/{id}', [CriterionController::class, 'edit'])->name('admin.criterion.edit');
+        Route::put('admin/criteria/{id}', [CriterionController::class, 'update'])->name('admin.criterion.update');
+        Route::delete('admin/criteria/{id}', [CriterionController::class, 'destroy'])->name('admin.criterion.destroy');
+
     });
 });

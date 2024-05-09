@@ -24,12 +24,12 @@ class UniversityController extends Controller
         if (isset($_GET['c'])) {
             $criteriaIds = $_GET['c'];
         } else {
-            foreach ($criteria as $criterion) {
-                $criteriaIds[] = $criterion->id;
-            }
+            // foreach ($criteria as $criterion) {
+            //     $criteriaIds[] = $criterion->id;
+            // }
         }
         $criteriaIds_str = implode(', ', $criteriaIds);
-        
+
         $number_of_digits_after_decimal_point = Setting::where('key', 'number_of_digits_after_decimal_point')->first()->value;
         $max_note_to_display = Setting::where('key', 'max_note_to_display')->first()->value;
         $number_of_university_per_page = Setting::where('key', 'number_of_university_per_page')->first()->value;
@@ -37,12 +37,16 @@ class UniversityController extends Controller
         $number_of_university_per_page = 100;
 
         $sqlRequest = "SELECT u.*, COUNT(r.id) AS nombre_avis, COALESCE(SUM(r.score), 0) AS total_score, ROUND((COALESCE(AVG(r.score),0)/5)*$max_note_to_display, $number_of_digits_after_decimal_point ) AS mean_score, $max_note_to_display AS max_note
-        FROM universities u LEFT JOIN ( SELECT * FROM ratings r WHERE r.criterion_id IN( $criteriaIds_str ) ) AS r
+        FROM universities u LEFT JOIN ( SELECT * FROM ratings r ";
+        if (isset($_GET['c'])) {
+            $sqlRequest = $sqlRequest . "WHERE r.criterion_id IN( $criteriaIds_str )";
+        }
+        $sqlRequest = $sqlRequest . " ) AS r
             ON r.university_id = u.id
         WHERE u.name LIKE '%$universitySearch%' 
         GROUP BY u.id
         ORDER BY mean_score DESC, nombre_avis DESC
-        LIMIT $number_of_university_per_page OFFSET ". ($page_number-1)*$number_of_university_per_page;
+        LIMIT $number_of_university_per_page OFFSET " . ($page_number - 1) * $number_of_university_per_page;
 
         $classifiedUniversities = DB::select($sqlRequest);
 
