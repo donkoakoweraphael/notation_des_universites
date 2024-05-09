@@ -111,7 +111,13 @@
                             </div>
                         </div>
                         <div class="col">
-                            <h6>{{ $comment->user->first_name }} {{ $comment->user->last_name }} ( <strong>{{ $comment->created_at }}</strong> )</h6>
+                            <h6>
+                                @if ($comment->user->is_admin)
+                                    message de l'administrateur :
+                                @endif
+                                {{ $comment->user->first_name }} {{ $comment->user->last_name }} (
+                                <strong>{{ $comment->created_at }}</strong> )
+                            </h6>
                             <p>
                                 {{ $comment->message }}
                             </p>

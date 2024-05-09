@@ -137,7 +137,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link @yield('settings-page-active')">
+            <a href="{{ route('admin.setting.index') }}" class="nav-link @yield('settings-page-active')">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#grid" />
                 </svg>

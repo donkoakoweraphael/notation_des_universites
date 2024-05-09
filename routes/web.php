@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UniversityAdministrationController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UserAdministrationController;
@@ -62,6 +63,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('admin/criteria/{id}', [CriterionController::class, 'destroy'])->name('admin.criterion.destroy');
 
         Route::get('admin/users', [UserAdministrationController::class, 'index'])->name('admin.user.index');
+
+        Route::get('admin/settings', [SettingController::class, 'index'])->name('admin.setting.index');
+        Route::put('admin/settings/{id}', [SettingController::class, 'edit'])->name('admin.setting.edit');
 
     });
 });

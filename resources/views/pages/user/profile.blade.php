@@ -38,7 +38,7 @@
                         @if ($user->age)
                             <li>{{ $user->calcAge() }} ans</li>
                         @endif
-                        <li>Vous avez donné {{ $user->ratings->count() }} avis</li>
+                        <li>Vous avez noté {{ $user->ratings->count() }} fois</li>
                     </ul>
                 </div>
             </div>
@@ -163,12 +163,16 @@
                             @foreach ($ratings as $rating)
                                 <li>
                                     (<strong>{{ $rating->created_at }}</strong>)
-                                    Vous avez donné 
-                                    <strong>{{ $rating->score}}</strong> 
-                                    à l'université 
+                                    Vous avez donné
+                                    <strong>{{ $rating->score }}</strong>
+                                    à l'université
                                     <strong>{{ $rating->university->name }}</strong>
-                                    pour le critère
-                                    <strong>{{ $rating->criterion->designation }}</strong>
+                                    @if ($rating->criterion)
+                                        pour le critère
+                                        <strong>{{ $rating->criterion->designation }}</strong>
+                                    @else
+                                        pour un critère qui n'est plus pris encompte
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
