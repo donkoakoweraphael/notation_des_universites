@@ -23,11 +23,25 @@ class ProfileController extends Controller
 
     function updateImage(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            []
+        );
         if ($request->image_path) {
-            $path = $request->file('image_path')->store('images', ['disk' => 'public']);
-            $request->user()->image_path = $path;
-            $request->user()->save();
+            try {
+                $path = $request->file('image_path')->store('images', ['disk' => 'public']);
+            } catch (\Throwable $th) {
+                $validator->after(function ($validator) {
+                    $validator->errors()->add(
+                        'image_path',
+                        'Le fichier n\'est pas valide'
+                    );
+                });
+            }
         }
+        $validator->validate();
+        $request->user()->image_path = $path;
+        $request->user()->save();
         return redirect(route('user.profile'));
     }
 

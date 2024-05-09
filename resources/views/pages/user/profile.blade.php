@@ -35,7 +35,7 @@
                         @if ($user->sex)
                             <li>{{ $user->calcSex() }}</li>
                         @endif
-                        @if ($user->age)
+                        @if ($user->birth_date)
                             <li>{{ $user->calcAge() }} ans</li>
                         @endif
                         <li>Vous avez noté {{ $user->ratings->count() }} fois</li>
