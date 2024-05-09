@@ -129,7 +129,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link @yield('users-page-active')">
+            <a href="{{ route('admin.user.index') }}" class="nav-link @yield('users-page-active')">
                 <svg class="bi pe-none me-2" width="16" height="16">
                     <use xlink:href="#people-circle" />
                 </svg>

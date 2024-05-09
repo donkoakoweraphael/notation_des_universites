@@ -11,6 +11,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UniversityAdministrationController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\UserAdministrationController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::get('admin/criteria/{id}', [CriterionController::class, 'edit'])->name('admin.criterion.edit');
         Route::put('admin/criteria/{id}', [CriterionController::class, 'update'])->name('admin.criterion.update');
         Route::delete('admin/criteria/{id}', [CriterionController::class, 'destroy'])->name('admin.criterion.destroy');
+
+        Route::get('admin/users', [UserAdministrationController::class, 'index'])->name('admin.user.index');
 
     });
 });

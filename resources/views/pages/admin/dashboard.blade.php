@@ -18,7 +18,7 @@
                 Nombre d'utilisateurs
             </div>
             <div class="row justify-content-center h1">
-                {{ $statistics['users_number'] + $statistics['deleted_users_number'] }}
+                {{ $statistics['users_number'] }}
             </div>
         </div>
         {{-- <div class="col-auto border border-2 rounded p-4 ms-3">
